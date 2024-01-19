@@ -16,3 +16,7 @@ mat-card{
   margin: 2em auto;
   text-align: center;
 }
+
+mat-paginator{
+  border-top: 1px solid darkgray;
+}

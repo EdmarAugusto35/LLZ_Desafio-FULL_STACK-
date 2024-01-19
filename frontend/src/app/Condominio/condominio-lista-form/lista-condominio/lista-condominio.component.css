@@ -15,23 +15,40 @@
 }
 .mat-column-cnpj {
   width: 32px;
-  border-right: 1px solid currentColor;
+  border-right: 1px solid darkgray;
   padding-right: 24px;
   text-align: center;
 }
 
 .mat-column-email {
   padding-left: 16px;
-  border-right: 1px solid currentColor;
+  border-right: 1px solid darkgray;
   text-align: center;
 }
 
 .mat-column-razaosocial {
   text-align: center;
-  border-right: 1px solid currentColor;
+  border-right: 1px solid darkgray;
 }
 
 .mat-column-acoes {
   text-align: center;
   width: 32px;
+}
+
+adicionar{
+  background: gray;
+  border-radius: 100px;
+}
+
+zebra-table {
+  width: 100%;
+}
+
+.zebra-table mat-row:nth-child(even) {
+  background-color: white; /* cor de fundo para linhas pares */
+}
+
+.zebra-table mat-row:nth-child(odd) {
+  background-color: #f2f2f2; /* cor de fundo para linhas ímpares */
 }

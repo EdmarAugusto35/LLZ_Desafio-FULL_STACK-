@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-  <mat-toolbar style="background : white">Adicionando Condomínio</mat-toolbar>
+  <mat-toolbar style="background : white">{{ isEditMode ? 'Editando' : 'Adicionando' }} Condomínio</mat-toolbar>
 
   <form [formGroup]="form" class="min-width">
     <mat-form-field class="full-width">

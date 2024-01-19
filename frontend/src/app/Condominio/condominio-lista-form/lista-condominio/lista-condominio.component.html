@@ -1,13 +1,13 @@
 <mat-toolbar style="background : white">
     <h4>Condomínios</h4>
     <div style="text-align: right; margin-left: auto;">
-      <button style="background-color: #f2f2f2;" (click)="onAdd()" mat-raised-button type="button">
+      <button (click)="onAdd()" mat-raised-button type="button" style="background-color: gray; color: white;">
         Adicionar Condomínio
       </button>
     </div>
   </mat-toolbar>
 
-  <mat-table [dataSource]="condominios">
+  <mat-table [dataSource]="condominios" class="zebra-table">
 
     <!-- Cnpj Column -->
     <ng-container matColumnDef="cnpj">
