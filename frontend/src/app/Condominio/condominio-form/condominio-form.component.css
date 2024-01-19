@@ -13,3 +13,7 @@ mat-card{
   width: 100%;
   min-width: 150px;
 }
+
+.rounded-field {
+  border-radius: 5px; // Ajuste conforme necessário
+}

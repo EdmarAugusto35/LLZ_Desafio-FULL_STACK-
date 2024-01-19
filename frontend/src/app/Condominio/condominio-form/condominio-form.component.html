@@ -1,35 +1,35 @@
-<mat-card>
-  <mat-card-content>
-  <mat-toolbar style="background : white">{{ isEditMode ? 'Editando' : 'Adicionando' }} Condomínio</mat-toolbar>
+  <mat-card style="border-radius: 10px;">
+    <mat-card-content>
+    <mat-toolbar style="background : white">{{ isEditMode ? 'Editando' : 'Adicionando' }} Condomínio</mat-toolbar>
 
-  <form [formGroup]="form" class="min-width">
-    <mat-form-field class="full-width">
-      <mat-label>CNPJ</mat-label>
-      <input matInput mask="00.000.000/0000-00"  [maxLength]="18" formControlName="cnpj" required #cnpj (input)="onCnpjInput($event)">
-      <mat-hint align="end">{{(form.get('cnpj')?.value || '').length}}/18</mat-hint>
-      <mat-error *ngIf="form.get('cnpj')?.invalid">{{getErrorMessageCnpj('cnpj')}}</mat-error>
-    </mat-form-field>
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field class="full-width rounded-field">
+        <mat-label>CNPJ</mat-label>
+        <input matInput mask="00.000.000/0000-00"  [maxLength]="18" formControlName="cnpj" required #cnpj (input)="onCnpjInput($event)">
+        <mat-hint align="end">{{(form.get('cnpj')?.value || '').length}}/18</mat-hint>
+        <mat-error *ngIf="form.get('cnpj')?.invalid">{{getErrorMessageCnpj('cnpj')}}</mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Razão Social</mat-label>
-      <input matInput placeholder="Insira sua Razão Social" formControlName="razaosocial" required #razaosocial>
-      <mat-hint align="end">{{razaosocial.value.length}}/150</mat-hint>
-      <mat-error *ngIf="form.get('razaosocial')?.invalid">{{getErrorMessageRazao('razaosocial')}}</mat-error>
-    </mat-form-field >
+      <mat-form-field class="full-width rounded-field">
+        <mat-label>Razão Social</mat-label>
+        <input matInput placeholder="Insira sua Razão Social" formControlName="razaosocial" required #razaosocial>
+        <mat-hint align="end">{{razaosocial.value.length}}/150</mat-hint>
+        <mat-error *ngIf="form.get('razaosocial')?.invalid">{{getErrorMessageRazao('razaosocial')}}</mat-error>
+      </mat-form-field >
 
-    <mat-form-field class="full-width" appearance="fill" >
-      <mat-label>E-mail</mat-label>
-      <input matInput placeholder="email@example.com" formControlName="email" required>
-      <mat-error *ngIf="emailError.invalid">{{getErrorMessageEmail()}}</mat-error>
-    </mat-form-field>
+      <mat-form-field class="full-width rounded-field" appearance="fill" >
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="email@example.com" formControlName="email" required>
+        <mat-error *ngIf="emailError.invalid">{{getErrorMessageEmail()}}</mat-error>
+      </mat-form-field>
 
-  </form>
-  </mat-card-content>
-<div style="text-align: right; margin-left: auto;">
-  <mat-card-actions>
-    <button mat-flat-button color="primary" *ngIf="!isEditMode" (click)="onSubmit()">Salvar</button>
-    <button mat-flat-button color="primary" *ngIf="isEditMode" (click)="onUpdate()">Atualizar</button>
-    <button mat-button (click)="onCancel()">Cancelar</button>
-  </mat-card-actions>
-</div>
-</mat-card>
+    </form>
+    </mat-card-content>
+  <div style="text-align: right; margin-left: auto;">
+    <mat-card-actions>
+      <button mat-flat-button color="primary" *ngIf="!isEditMode" (click)="onSubmit()">Salvar</button>
+      <button mat-flat-button color="primary" *ngIf="isEditMode" (click)="onUpdate()">Atualizar</button>
+      <button mat-button (click)="onCancel()">Cancelar</button>
+    </mat-card-actions>
+  </div>
+  </mat-card>
