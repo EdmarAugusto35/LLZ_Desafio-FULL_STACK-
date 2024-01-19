@@ -1,61 +1,53 @@
 package com.desafio_llz.controller;
 
-import com.desafio_llz.modelo.entidade.Condominio;
-import com.desafio_llz.modelo.repositorio.CondominioRepository;
+import com.desafio_llz.controller.dto.CondominioDto;
+import com.desafio_llz.controller.dto.CondominioPageDto;
+import com.desafio_llz.modelo.service.CondominioService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
-@RequestMapping("/condominio")
+@RequestMapping("/api/condominio")
+@CrossOrigin("*")
 public class CondominioController {
 
     @Autowired
-    private CondominioRepository condominioRepository;
+    private CondominioService condominioService;
 
-    public CondominioController(CondominioRepository condominioRepository) {
-        this.condominioRepository = condominioRepository;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Condominio salvarCondominio(@RequestBody @Valid Condominio condominio){
-        return condominioRepository.save(condominio);
+    public CondominioDto salvarCondominio(@RequestBody @Valid CondominioDto condominio) {
+        return condominioService.salvarCondominio(condominio);
+    }
+
+    @GetMapping("/{cnpj}")
+    public CondominioDto buscarCondominioPorCnpj(@PathVariable @Valid String cnpj) {
+        return condominioService.getCondominioByCnpj(cnpj);
     }
 
     @GetMapping
-    public Page<Condominio> listarTodosCondominios(Pageable pageable){
-        return condominioRepository.findAll(pageable);
+    public CondominioPageDto listarTodosCondominios(
+            @RequestParam(defaultValue = "0") @PositiveOrZero int page,
+            @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) {
+        return condominioService.listarTodosCondominios(page, pageSize);
     }
 
     @DeleteMapping("/{cnpj}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarCondominio(@PathVariable String cnpj){
-        condominioRepository
-                .findById(cnpj)
-                .map(condominio->{
-                    condominioRepository.delete(condominio);
-                    return Void.TYPE;
-                })
-                .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Condominio não encontrado"));
+    public void deletarCondominio(@PathVariable String cnpj) {
+        condominioService.deletarCondominio(cnpj);
     }
 
     @PutMapping("/{cnpj}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarCondominio(@PathVariable String cnpj, @RequestBody Condominio condominioAtulizado){
-        condominioRepository
-                .findById(cnpj)
-                .map(condominio -> {
-                    condominio.setEmail(condominioAtulizado.getEmail());
-                    condominio.setRazaosocial(condominioAtulizado.getRazaosocial());
-                   return condominioRepository.save(condominio);
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Condominio não encontrado"));
+    public void atualizarCondominio(@PathVariable String cnpj, @RequestBody CondominioDto condominioAtulizado) {
+        condominioService.atualizarCondominio(cnpj, condominioAtulizado);
     }
 }

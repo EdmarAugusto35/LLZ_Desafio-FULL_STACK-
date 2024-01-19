@@ -1,0 +1,18 @@
+.mat-button{
+  background: gray;
+  text-decoration-color: white;
+}
+
+.load-spinner{
+  padding: 25px;
+  background: rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card{
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}

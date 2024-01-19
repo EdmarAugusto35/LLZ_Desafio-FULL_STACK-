@@ -1,0 +1,49 @@
+<mat-toolbar style="background : white">
+    <h4>Condomínios</h4>
+    <div style="text-align: right; margin-left: auto;">
+      <button style="background-color: #f2f2f2;" (click)="onAdd()" mat-raised-button type="button">
+        Adicionar Condomínio
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-table [dataSource]="condominios">
+
+    <!-- Cnpj Column -->
+    <ng-container matColumnDef="cnpj">
+      <mat-header-cell *matHeaderCellDef style="background-color: #f2f2f2;"> CNPJ</mat-header-cell>
+      <mat-cell *matCellDef="let condominio"> {{ condominio.cnpj | mask: '00.000.000/0000-00'}}</mat-cell>
+    </ng-container>
+
+    <!-- email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef style="background-color: #f2f2f2;"> E-mail</mat-header-cell>
+      <mat-cell *matCellDef="let condominio"> {{ condominio.email }}</mat-cell>
+    </ng-container>
+
+    <!-- razao Social Column -->
+    <ng-container matColumnDef="razaosocial">
+      <mat-header-cell  *matHeaderCellDef  style="background-color: #f2f2f2;"> Razão Social</mat-header-cell>
+      <mat-cell *matCellDef="let condominio"> {{ condominio.razaosocial }}</mat-cell>
+    </ng-container>
+
+    <!-- Ação Column -->
+    <ng-container matColumnDef="acoes">
+      <mat-header-cell *matHeaderCellDef style="background-color: #f2f2f2;"> Ações</mat-header-cell>
+
+      <mat-cell *matCellDef="let condominio">
+        <button mat-icon-button color="primary" (click)="onEdit(condominio)" aria-label="Editar">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn"  (click)="onDelete(condominio)" aria-label="Excluir">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>

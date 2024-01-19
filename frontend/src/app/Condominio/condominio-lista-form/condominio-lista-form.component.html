@@ -1,0 +1,29 @@
+<mat-card>
+
+    <div *ngIf="condominios$ | async as  condominios; else carregando"
+         class=" colum-flex mat-elevation-z8">
+
+      <app-lista-condominio
+        [condominios]="condominios.condominios"
+        (add)="onAdd()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+      ></app-lista-condominio>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Selecione pagina de Condomínios"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [length]="condominios.totalElements"
+                     (page)="refresh($event)"
+      >
+      </mat-paginator>
+    </div>
+
+    <ng-template #carregando>
+      <div class="load-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+</mat-card>

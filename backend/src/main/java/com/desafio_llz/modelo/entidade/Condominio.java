@@ -1,16 +1,12 @@
 package com.desafio_llz.modelo.entidade;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "condominiollz")
@@ -35,8 +31,12 @@ public class Condominio {
     @Email(message = "{campo.email.invalido}")
     private String email;
 
-    @Column(name = "data_cadastro", updatable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataCadastro;
+    @PrePersist
+    public void prePersist() {
+        // Certifique-se de que o CNPJ está atribuído antes de persistir
+        if (cnpj == null || cnpj.isEmpty()) {
+            throw new IllegalStateException("CNPJ deve ser atribuído antes de persistir");
+        }
+    }
 
 }

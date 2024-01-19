@@ -1,0 +1,37 @@
+.mat-table{
+  overflow: auto;
+  max-width: 600px;
+  background-color: grey;
+}
+
+.action-column{
+  flex: 0 0 75px;
+  background-color: grey;
+}
+
+.action-column-header {
+  margin: 0 auto;
+  text-align: center;
+}
+.mat-column-cnpj {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-email {
+  padding-left: 16px;
+  border-right: 1px solid currentColor;
+  text-align: center;
+}
+
+.mat-column-razaosocial {
+  text-align: center;
+  border-right: 1px solid currentColor;
+}
+
+.mat-column-acoes {
+  text-align: center;
+  width: 32px;
+}
